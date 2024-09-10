@@ -1,0 +1,22 @@
+#################################
+# 所有业务服务的路由规则 在这里创建
+#################################
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: apps-ingressroute
+  namespace: apps
+spec:
+  entryPoints:
+    - http  # http or https
+  routes:
+    # whoami服务的路由规则
+    - match: Host(`vm.apps.com`) && PathPrefix(`/test/`)
+      kind: Rule
+      services:
+        - name: whoami-svc
+          port: 80
+#      middlewares:
+#        - name: test-forward-auth
+  # tls: {}  # 强制使用 HTTPS

@@ -1,0 +1,43 @@
+#################################################################
+## 所有http请求重定向到https
+#################################################################
+#[http.middlewares.https-redirect.redirectScheme]
+#  scheme = "https"
+#[http.middlewares.content-compress.compress]
+#
+#[http.services]
+#  [http.services.noop.LoadBalancer]
+#    [[http.services.noop.LoadBalancer.servers]]
+#      url = ""
+#
+#[http.routers]
+#  [http.routers.https-redirect]
+#    entryPoints = ["http"]
+#      rule = "HostRegexp(`{any:.*}`)"
+#      middlewares = ["https-redirect"]
+#      service = "noop"
+#
+##################################################################
+### https tls证书
+##################################################################
+#[tls.options]
+#  [tls.options.default]
+#    minVersion = "VersionTLS12"
+#    maxVersion = "VersionTLS12"
+#    cipherSuites = [
+#      "TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256",
+#      "TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384",
+#      "TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305",
+#      "TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305",
+#      "TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256",
+#      "TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256",
+#    ]
+#
+#[tls.stores.default.defaultCertificate]
+#  certFile = "/etc/certs/tls.crt"
+#  keyFile = "/etc/certs/tls.key"
+#
+#[[tls.certificates]]
+#  certFile = "/etc/certs/tls.crt"
+#  keyFile = "/etc/certs/tls.key"
+#  stores = ["default"]
