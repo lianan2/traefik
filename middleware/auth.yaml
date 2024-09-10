@@ -1,0 +1,10 @@
+# 鉴权中间件
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: authentication-middleware      # 中间件名称
+  namespace: apps                      # 指定 Namespace
+spec:
+  forwardAuth:
+    address: "http://127.0.0.1:8080/v1/authentication"  # 认证转发地址
+    trustForwardHeader: true  # 信任全部X-Forwarded-* header

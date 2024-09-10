@@ -1,11 +1,7 @@
-#################################
-# 所有业务服务的路由规则 在这里创建
-#################################
----
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
-  name: apps-ingressroute
+  name: whoami-ingressroute
   namespace: apps
 spec:
   entryPoints:
@@ -17,6 +13,5 @@ spec:
       services:
         - name: whoami-svc
           port: 80
-#      middlewares:
-#        - name: test-forward-auth
-  # tls: {}  # 强制使用 HTTPS
+      middlewares:
+        - name: authentication-middleware  # 使用鉴权中间件

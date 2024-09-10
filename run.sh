@@ -10,22 +10,13 @@ kubectl -n traefik create configmap traefik-config-dynamic --from-file=conf/dyna
 #kubectl -n traefik create secret tls traefik-cert --cert tls2/server.crt --key tls2/server.key
 #kubectl -n kuas create secret tls traefik-cert --cert tls2/server.crt --key tls2/server.key
 
-cd traefik_yml || exit
-
 # 安装traefik crd, 创建rbac权限
-kubectl apply -f crd.yml -f crd-rbac.yml
+kubectl apply -f traefik_yml/crd.yaml -f traefik_yml/crd-rbac.yaml
 
 # 开启traefik服务
-kubectl apply -f deployment.yml
-
-# traefik svc
-# kubectl apply -f service.yml
-
-# 中间件
-# kubectl apply -f auth-forward.yml
+kubectl apply -f traefik_yml/deployment.yaml
 
 # 路由规则
-# kubectl apply -f ingress.yml
-kubectl apply -f ingressroute.yml
+kubectl apply -f ingressroute/whoami.yaml
 
 
