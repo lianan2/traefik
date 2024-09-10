@@ -14,4 +14,6 @@ spec:
         - name: whoami-svc
           port: 80
       middlewares:
-        - name: authentication-middleware  # 使用鉴权中间件
+        - name: auth-errors   # 鉴权失败重定向中间件
+        - name: forward-auth  # 鉴权中间件
+

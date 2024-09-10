@@ -2,9 +2,25 @@
 apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
 metadata:
-  name: authentication-middleware      # 中间件名称
-  namespace: apps                      # 指定 Namespace
+  name: forward-auth
+  namespace: apps
 spec:
   forwardAuth:
-    address: "http://127.0.0.1:8080/v1/authentication"  # 认证转发地址
-    trustForwardHeader: true  # 信任全部X-Forwarded-* header
+    address: "http://10.41.120.57:8082/v2/authentication"  # 认证转发地址
+    trustForwardHeader: true                               # 信任全部X-Forwarded-* header
+
+---
+# 鉴权失败的重定向
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: auth-errors
+  namespace: apps
+spec:
+  errors:
+    status:
+      - 401-403
+    service:
+      name: whoami-svc
+      port: 80
+    query: "/test/sign_in"
