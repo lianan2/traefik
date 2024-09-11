@@ -13,13 +13,12 @@ $ sh run.sh
 创建测试服务：
 ```
 $ kubectl create ns apps
+# 创建deployment和service
 $ kubectl apply -f apps_yml/whoami.yaml
+# 创建路由规则
+$ kubectl apply -f ingressroute/whoami.yaml
 ```
-查看ingressroute配置：
-```
-$ kubectl -napps get ingressroute -o yaml
-```
-测试接口请求：
+请求接口测试：
 ```
 $ curl http://vm.apps.com/test/test
 ```
@@ -39,7 +38,7 @@ kubectl apply -f middleware/auth.yaml
 ```
 kubectl apply -f ingressroute/whoami.yaml
 ```
-请求接口测试一下：
+请求接口测试：
 ```
 $ curl http://vm.apps.com/test/test -v
 返回401未认证，重定向到/test/sign_in路由

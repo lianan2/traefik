@@ -14,9 +14,5 @@ kubectl -n traefik create configmap traefik-config-dynamic --from-file=conf/dyna
 kubectl apply -f traefik_yml/crd.yaml -f traefik_yml/crd-rbac.yaml
 
 # 开启traefik服务
+# 这里会将traefik的80和8080端口映射到host
 kubectl apply -f traefik_yml/deployment.yaml
-
-# 路由规则
-kubectl apply -f ingressroute/whoami.yaml
-
-
