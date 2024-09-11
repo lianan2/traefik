@@ -20,7 +20,7 @@ $ kubectl apply -f ingressroute/whoami.yaml
 ```
 请求接口测试：
 ```
-$ curl http://vm.apps.com/test/test
+$ curl http://vm.apps.com/test
 ```
 
 ## 2 增加鉴权中间件
@@ -40,9 +40,23 @@ kubectl apply -f ingressroute/whoami.yaml
 ```
 请求接口测试：
 ```
-$ curl http://vm.apps.com/test/test -v
+$ curl http://vm.apps.com/test -v
 返回401未认证，重定向到/test/sign_in路由
 
-$ curl http://vm.apps.com/test/test --header 'Authorization: Bearer xxx'
+$ curl http://vm.apps.com/test --header 'Authorization: Bearer NTEwMjk2MTI1MzIwNzI1NzM.NDMwNjg3MTg4MjZlMjBhNWJjNTQ1YmZkZTQ1MTMzMDU0M2E2NmNiMA'
 返回200
+```
+
+## 3 增加登录拦截器
+创建中间件：
+```
+kubectl apply -f middleware/login_interceptor.yaml
+```
+更新ingressroute：
+```
+kubectl apply -f ingressroute/whoami.yaml
+```
+请求接口测试：
+```
+$ curl http://vm.apps.com/v2/user/login --header 'X-User-Name: zhangsan'
 ```

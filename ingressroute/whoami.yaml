@@ -8,7 +8,7 @@ spec:
     - http  # http or https
   routes:
     # whoami服务的路由规则
-    - match: Host(`vm.apps.com`) && PathPrefix(`/test/`)
+    - match: Host(`vm.apps.com`) && PathPrefix(`/`) && !PathPrefix(`/v2/user/login`)
       kind: Rule
       services:
         - name: whoami-svc
@@ -16,4 +16,11 @@ spec:
       middlewares:
         - name: auth-errors   # 鉴权失败重定向中间件
         - name: forward-auth  # 鉴权中间件
+    - match: Host(`vm.apps.com`) && PathPrefix(`/v2/user/login`)
+      kind: Rule
+      services:
+        - name: whoami-svc
+          port: 80
+      middlewares:
+        - name: login-interceptor  # 登录拦截中间件
 

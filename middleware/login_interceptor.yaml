@@ -1,0 +1,12 @@
+# 登录拦截器
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: login-interceptor
+  namespace: apps
+spec:
+  forwardAuth:
+    address: "http://10.41.120.57:8082/v2/login-interceptor"
+    trustForwardHeader: true
+    authRequestHeaders:
+      - X-Kuas-User-Name
