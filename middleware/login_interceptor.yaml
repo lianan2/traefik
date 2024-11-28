@@ -1,0 +1,12 @@
+# 登录拦截器
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: login-interceptor
+  namespace: apps
+spec:
+  forwardAuth:
+    address: "https://www.baidu.com/"
+    trustForwardHeader: true
+    authRequestHeaders:
+      - X-Kuas-User-Name

@@ -1,0 +1,30 @@
+# 以下ingress规则被nginx接管
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: traefik-ingress
+  namespace: traefik
+spec:
+  rules:
+    # 开放traefik dashboard
+    - host: traefik.ui
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: traefik-svc   # 对应svc name
+                port:
+                  number: 8080  # 对应dashboard的port
+    # 将所有api入口请求 转发给traefik ingress controller
+    - host: testkuas.kylincloud.org
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: traefik-svc   # 对应svc name
+                port:
+                  number: 80  # 对应http入口的port
