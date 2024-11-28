@@ -6,14 +6,7 @@ metadata:
   namespace: apps
 spec:
   forwardAuth:
-<<<<<<< HEAD
-    address: "http://10.41.120.57:8082/v2/login-interceptor"
-    trustForwardHeader: true
-    authRequestHeaders:
-      - X-Kuas-User-Name
-=======
     address: "https://www.baidu.com/"
     trustForwardHeader: true
     authRequestHeaders:
       - X-Kuas-User-Name
->>>>>>> dev
