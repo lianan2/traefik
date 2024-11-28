@@ -1,0 +1,12 @@
+# rename header中间件
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: rename-headers-plugin
+  namespace: apps
+spec:
+  plugin:
+    traefik-custom-headers-plugin:
+      renameData:
+        - existingHeaderName: X-Kuas-SSO-Token
+          newHeaderName: Authorization

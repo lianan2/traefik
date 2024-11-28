@@ -23,6 +23,12 @@
   [entryPoints.http]
     address = ":80"
 
+<<<<<<< HEAD
+=======
+    [entryPoints.http.forwardedHeaders]
+      trustedIPs = ["127.0.0.1", "172.17.0.0/16"]
+
+>>>>>>> dev
   [entryPoints.https]
     address = ":443"
 
@@ -42,7 +48,11 @@
   # Optional
   # Default: "ERROR"
   #
+<<<<<<< HEAD
   level = "INFO"
+=======
+  level = "DEBUG"
+>>>>>>> dev
 
   # Sets the filepath for the traefik log. If not specified, stdout will be used.
   # Intermediate directories are created if necessary.
@@ -162,3 +172,10 @@
 # traefik监听含有指定标签的ingress
 [providers.kubernetesIngress]
   ingressclass = "traefik"
+<<<<<<< HEAD
+=======
+
+[experimental.plugins.traefik-custom-headers-plugin]
+  moduleName = "github.com/AdamEszes/traefik-custom-headers-plugin"
+  version = "v0.1.4"
+>>>>>>> dev

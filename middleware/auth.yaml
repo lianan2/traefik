@@ -6,8 +6,15 @@ metadata:
   namespace: apps
 spec:
   forwardAuth:
+<<<<<<< HEAD
     address: "http://10.41.120.57:8082/v2/authentication"  # 认证转发地址
     trustForwardHeader: true                               # 信任全部X-Forwarded-* header
+=======
+    address: "https://www.baidu.com"  # 认证转发地址
+    trustForwardHeader: true          # 信任全部X-Forwarded-* header
+    authResponseHeaders:
+      - X-Kuas-User-Id
+>>>>>>> dev
 
 ---
 # 鉴权失败的重定向
@@ -23,4 +30,8 @@ spec:
     service:
       name: whoami-svc
       port: 80
+<<<<<<< HEAD
     query: "/test/sign_in"
+=======
+    query: "/test/sign_in?{query}"
+>>>>>>> dev
