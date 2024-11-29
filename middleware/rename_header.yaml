@@ -2,11 +2,11 @@
 apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
 metadata:
-  name: rename-headers-plugin
+  name: rename-headers
   namespace: apps
 spec:
   plugin:
     traefik-custom-headers-plugin:
       renameData:
-        - existingHeaderName: X-Kuas-SSO-Token
-          newHeaderName: Authorization
+        - existingHeaderName: X-Test
+          newHeaderName: X-Test-New

@@ -14,9 +14,9 @@ spec:
         app: whoami
     spec:
       containers:
-        - image: traefik/whoami:v1.10.3
+        - name: whoami
+          image: traefik/whoami:v1.10.3
           imagePullPolicy: IfNotPresent
-          name: whoami
           ports:
             - containerPort: 80
               protocol: TCP

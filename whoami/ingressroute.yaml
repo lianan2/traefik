@@ -13,8 +13,10 @@ spec:
         - name: whoami-svc
           port: 80
       middlewares:
-        - name: auth-errors   # 鉴权失败重定向中间件
-        - name: forward-auth  # 鉴权中间件
+        - name: rename-headers # header重命名
+        - name: auth-errors    # 鉴权失败重定向中间件
+        - name: forward-auth   # 鉴权中间件
+
     - match: Host(`vm.apps.com`) && PathPrefix(`/v2/user/login`)
       kind: Rule
       services:
