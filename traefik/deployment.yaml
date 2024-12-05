@@ -24,15 +24,12 @@ spec:
               hostPort: 80
               protocol: TCP
             - containerPort: 8080
-              hostPort: 8080
+              hostPort: 18080
               protocol: TCP
           env:
             - name: TZ
               value: Asia/Shanghai
           volumeMounts:
-#            - name: traefik-cert
-#              mountPath: /etc/certs
-#              readOnly: true
             - name: traefik-config
               mountPath: /etc/traefik/traefik.toml
               subPath: traefik.toml
@@ -40,9 +37,6 @@ spec:
               mountPath: /etc/traefik/dynamic.toml
               subPath: dynamic.toml
       volumes:
-#        - name: traefik-cert
-#          secret:
-#            secretName: traefik-cert
         - name: traefik-config
           configMap:
             name: traefik-config

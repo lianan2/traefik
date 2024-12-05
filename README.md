@@ -12,7 +12,7 @@ sh build/clear.sh
 ```
 
 
-访问 traefik Dashboard: http://vm.apps.com:8080/
+访问 traefik Dashboard: http://vm.apps.com:18080/
 
 测试请求whoami服务:
 ```
