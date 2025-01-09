@@ -6,8 +6,8 @@ metadata:
   namespace: apps
 spec:
   forwardAuth:
-    address: "http://10.41.120.57:9210/middleware-request/forward-auth"  # 认证转发地址
-    trustForwardHeader: true          # 信任全部X-Forwarded-* header
+    address: "http://whoami-svc.apps:80/forwardAuth"   # 认证转发地址
+    trustForwardHeader: true                           # 信任全部X-Forwarded-* header
     authResponseHeadersRegex: ^X-
 
 ---
@@ -24,4 +24,4 @@ spec:
     service:
       name: whoami-svc
       port: 80
-    query: "/test/sign_in?{query}"
+    query: "/login"

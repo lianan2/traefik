@@ -7,17 +7,29 @@ spec:
   entryPoints:
     - http
   routes:
+    # 路由 1: 测试鉴权
     - match: Host(`vm.apps.com`) && PathPrefix(`/`)
       kind: Rule
       services:
         - name: whoami-svc
           port: 80
       middlewares:
-        - name: rename-headers # header重命名
-        - name: auth-errors    # 鉴权失败重定向中间件
-        - name: forward-auth   # 鉴权中间件
+#        - name: rename-headers  # header重命名, 不生效
+        - name: auth-errors     # 鉴权失败重定向中间件
+        - name: forward-auth    # 鉴权中间件
 
-    - match: Host(`vm.apps.com`) && PathPrefix(`/v2/user/login`)
+    # 路由 2: 测试跨域
+    - match: Host(`vm.apps.com`) && PathPrefix(`/cors`)
+      kind: Rule
+      services:
+        - name: whoami-svc
+          port: 80
+      middlewares:
+#        - name: cors-normal             # 跨域header配置，使用不允许凭据的CORS中间件
+        - name: cors-with-credentials   # 跨域header配置，使用允许凭据的CORS中间件
+
+    # 路由 3：登录接口路由
+    - match: Host(`vm.apps.com`) && PathPrefix(`/login`)
       kind: Rule
       services:
         - name: whoami-svc

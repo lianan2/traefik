@@ -1,0 +1,36 @@
+# 配置CORS头中间件, 允许跨域请求并携带凭据
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: cors-with-credentials
+  namespace: apps
+spec:
+  headers:
+    accessControlAllowMethods:            # 允许的 HTTP 方法
+      - "GET"
+      - "POST"
+      - "OPTIONS"
+    accessControlAllowHeaders:            # 允许的自定义请求头
+      - "X-Custom-Key"
+    accessControlAllowOriginList:         # 允许的来源
+      - "https://a.example.cn"
+    accessControlMaxAge: 120              # 预检请求缓存时间
+    accessControlAllowCredentials: true   # 允许cookie凭据
+
+# 配置CORS头中间件, 允许跨域请求但不允许携带凭据
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: cors-normal
+  namespace: apps
+spec:
+  headers:
+    accessControlAllowMethods:
+      - "*"
+    accessControlAllowHeaders:
+      - "*"
+    accessControlAllowOriginList:
+      - "*"
+    accessControlAllowCredentials: false
